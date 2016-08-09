@@ -113,6 +113,7 @@ data Output' = Output
     { _evalO     :: EvalP EvalO
     }
 instance Eq Output where (==) = equalRef
+instance Ord Output where compare = compareRef
 
 data SomeNode
     = forall a. P (Pulse a)

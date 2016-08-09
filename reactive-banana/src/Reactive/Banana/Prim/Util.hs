@@ -34,6 +34,9 @@ instance Hashable (Ref a) where hashWithSalt s (Ref _ u) = hashWithSalt s u
 equalRef :: Ref a -> Ref b -> Bool
 equalRef (Ref _ a) (Ref _ b) = a == b
 
+compareRef :: Ref a -> Ref b -> Ordering
+compareRef (Ref _ a) (Ref _ b) = compare (hashUnique a) (hashUnique b)
+
 newRef :: MonadIO m => a -> m (Ref a)
 newRef a = liftIO $ liftM2 Ref (newIORef a) newUnique
 
